@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Login
+    //- script(src="/scripts/login.js")
+    link(rel="stylesheet", href="/styles/login.css")
+  body
+    .container
+      h1 Login
+      form(id="loginForm", action="/login", method="POST")
+        input(type="email", id="email", name="email", placeholder="Email", required)
+        span#emailError.error.hidden Email is invalid
+        input(type="password", id="password", name="password", placeholder="Password", minlength="6", required)
+        span#passwordError.error.hidden Password must be at least 6 characters long
+        button(type="submit", id="submitButton") Login
+      span#loginError.error.hidden Invalid credentials

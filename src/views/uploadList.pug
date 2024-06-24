@@ -1,0 +1,100 @@
+doctype html
+html
+  head
+    title= `Uploadlist - ${username}`
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+    style.
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      .page-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      main {
+        flex: 1;
+      }
+      .search-form {
+        margin-bottom: 20px;
+      }
+      .table th, .table td {
+        vertical-align: middle;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      .table thead th {
+        background-color:  black;
+        color: white
+      }
+      .table tbody tr:hover {
+        background-color: #f1f1f1;
+      }
+      .pagination .page-item.disabled .page-link {
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+  body
+    header.navbar.navbar-dark.bg-dark.page-header
+      a.navbar-brand(href="/") Home
+      form.navbar-form.form-inline(action="/logout" method="post")
+        button.btn.btn-outline-light(type="submit") Logout
+    main.container.mt-4
+      form.search-form.form-inline.mb-4(action=`/${username}/uploadList/search`, method="get")
+        input.form-control(type="text" name="searchTerm" placeholder="Search Term" required)
+        button.btn.btn-primary.ml-2(type="submit") Search
+      a.btn.btn-success.mb-4(href=`/${username}/uploadList/uploadForm`) Upload
+      if searchPerformed
+        if files.length
+          table.table.table-striped.table-hover
+            thead
+              tr
+                th Name
+                th Path
+                th Date of Upload
+                th Size (bytes)
+                th Format
+            tbody
+              each file in files
+                tr
+                  td= file.name
+                  td= file.path
+                  td= file.date_of_upload
+                  td= file.size_of_file
+                  td= file.format_of_file
+        else
+          div.alert.alert-warning No files found matching the search term.
+      else
+        if files.length
+          table.table.table-striped.table-hover
+            thead
+              tr
+                th Name
+                th Path
+                th Date of Upload
+                th Size (bytes)
+                th Format
+            tbody
+              each file in files
+                tr
+                  td= file.name
+                  td= file.path
+                  td= file.date_of_upload
+                  td= file.size_of_file
+                  td= file.format_of_file
+        else
+          div.alert.alert-info No files uploaded yet.
+      if totalPages > 1
+        nav
+          ul.pagination.justify-content-center
+            li.page-item(class=(currentPage == 1 ? 'disabled' : ''))
+              a.page-link(href=(currentPage == 1 ? '#' : `/${username}/uploadList?page=${Math.max(currentPage-1, 1)}`)) Previous
+            each num in [...Array(totalPages).keys()].map(i => i + 1)
+              li.page-item(class=(currentPage == num ? 'active' : ''))
+                a.page-link(href=`/${username}/uploadList?page=${num}`)= num
+            li.page-item(class=((currentPage == totalPages || files.length == 0 )? 'disabled' : ''))
+              a.page-link(href=((currentPage == totalPages || files.length == 0 )? '#' : `/${username}/uploadList?page=${parseInt(currentPage) + 1}`)) Next
+    footer.footer.bg-dark.text-white.text-center.py-3
+      | Copyright 2024.

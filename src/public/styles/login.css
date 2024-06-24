@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #222;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Make body cover the entire viewport */
+}
+
+.container {
+  width: 300px;
+  text-align: center;
+  padding: 30px; /* Add padding for space inside the box */
+  background-color: #333; /* Add background color to the container */
+  border-radius: 10px; /* Add border radius for rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+}
+
+h1 {
+  margin-bottom: 30px;
+  color: #007bff;
+}
+
+input[type="email"],
+input[type="password"],
+button[type="submit"] {
+  width: calc(100% - 20px); /* Adjust width for padding */
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #444; /* Darker background color */
+  color: #fff;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  cursor: pointer;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+button[type="submit"]:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#error {
+  color: #ff3b30;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 1rem;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
