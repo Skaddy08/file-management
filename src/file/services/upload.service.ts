@@ -79,8 +79,6 @@ export class UploadService {
   }
 }
 
-
-
   async findPaginatedBySearchTermAndUserId(userId: string, searchTerm: string, page: number = 1, limit: number = 10): Promise<File[]> {
     const skip = (page - 1) * limit;
     const userUploads = await this.userUploadsModel.findOne({ userId: new Types.ObjectId(userId) }).populate({
